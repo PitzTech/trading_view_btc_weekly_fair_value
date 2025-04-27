@@ -1,0 +1,23 @@
+//@version=6
+indicator("BTC Fair Value Levels", overlay=true)
+
+// Input: Moving Average Length
+length = input.int(200, title="MA Length", minval=1)
+
+// Calculate 200W MA (based on current price)
+ma_200w = ta.sma(close, length)
+
+// Calculate Extensions
+level_0 = ma_200w * 0.5
+level_50 = ma_200w * 1.5
+level_100 = ma_200w * 2
+level_150 = ma_200w * 2.5
+level_200 = ma_200w * 3
+
+
+// Fill the spaces between the plots with transparency
+fill(plot(level_0), plot(ma_200w), color=color.new(color.blue, 80))  // 80 is transparency level
+fill(plot(ma_200w), plot(level_50), color=color.new(color.green, 80))  // 80 is transparency level
+fill(plot(level_50), plot(level_100), color=color.new(color.yellow, 80))  // 80 is transparency level
+fill(plot(level_100), plot(level_150), color=color.new(color.orange, 80))  // 80 is transparency level
+fill(plot(level_150), plot(level_200), color=color.new(color.red, 80))  // 80 is transparency level
